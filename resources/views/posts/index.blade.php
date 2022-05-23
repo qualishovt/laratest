@@ -27,8 +27,15 @@
                     <td>{{ $post->translate('fr')->title }}</td>
                     <td>{{ $post->translate('fr')->content }}</td>
                     <td class="text-end">
-                        <a class="btn btn-warning" href="/posts/{{ $post->id }}/edit" role="button"><i class="bi bi-pencil"></i> Edit</a>
-                        <a class="btn btn-danger" href="/posts/{{ $post->id }}/edit" role="button"><i class="bi bi-trash"></i> Delete</a>
+                        <a class="btn btn-warning" href="/posts/{{ $post->id }}/edit" role="button"><i
+                                class="bi bi-pencil"></i> Edit</a>
+                        <form class="d-inline" action="/posts/{{ $post->id }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" role="button" onclick="return confirm('Delete?')">
+                                <i class="bi bi-trash"></i> Delete
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

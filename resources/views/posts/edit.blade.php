@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>New Post</h1>
+    <h1>Edit Post</h1>
 
-    <form method="post" action="/posts">
+    <form method="post" action="/posts/{{ $post->id }}">
         @csrf
+        @method('PUT')
         <div class="mb-3">
             <label for="author" class="form-label">Author</label>
             <input type="text" name="author" value="{{ old('author') ?? $post->author }}" class="form-control"

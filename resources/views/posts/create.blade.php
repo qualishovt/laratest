@@ -27,6 +27,7 @@
             <label for="content_fr" class="form-label">Content Fr</label>
             <textarea name="fr[content]" class="form-control" id="content_fr" rows="3"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <a class="btn btn-outline-secondary" href="/posts" role="button"><i class="bi bi-x-lg"></i> Back</a>
+        <button type="submit" class="btn btn-primary float-end">Submit</button>
     </form>
 @endsection
