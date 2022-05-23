@@ -13,4 +13,9 @@ class Post extends Model implements TranslatableContract
 
     public $translatedAttributes = ['title', 'content'];
     protected $fillable = ['author'];
+
+    // public function getLocaleKey()
+    // {
+    //     return 'language_id';
+    // }
 }
