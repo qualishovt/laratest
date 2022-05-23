@@ -34,6 +34,6 @@
                 rows="3">{{ old('fr.content') ?? $post->translate('fr')->content }}</textarea>
         </div>
         <a class="btn btn-outline-secondary" href="/posts" role="button"><i class="bi bi-x-lg"></i> Back</a>
-        <button type="submit" class="btn btn-primary float-end">Submit</button>
+        <button type="submit" class="btn btn-success float-end">Submit</button>
     </form>
 @endsection

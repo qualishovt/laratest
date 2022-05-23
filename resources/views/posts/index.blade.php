@@ -3,7 +3,7 @@
 @section('content')
     <h1>Posts</h1>
 
-    <a class="btn btn-primary float-end" href="/posts/create" role="button"><i class="bi bi-plus-lg"></i> Add new</a>
+    <a class="btn btn-success float-end" href="/posts/create" role="button"><i class="bi bi-plus-lg"></i> Add new</a>
 
     <table class="table">
         <thead>
@@ -41,4 +41,7 @@
             @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center">
+        {{ $posts->links() }}
+    </div>
 @endsection
