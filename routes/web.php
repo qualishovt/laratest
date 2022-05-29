@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,5 @@ Route::put('posts/{post}', [PostController::class, 'update']);
 Route::delete('posts/{post}', [PostController::class, 'destroy']);
 
 Route::get('pay', [PayOrderController::class, 'store']);
+
+Route::get('channels', [ChannelController::class, 'index']);

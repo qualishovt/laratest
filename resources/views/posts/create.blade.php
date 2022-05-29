@@ -10,6 +10,7 @@
             <input type="text" name="author" class="form-control" id="author">
         </div>
         <hr>
+        @include('partials.channels.dropdown', ['field' => 'my_channels'])
         <div class="mb-3">
             <label for="title_en" class="form-label">Title En</label>
             <input type="text" name="en[title]" class="form-control" id="title_en">
