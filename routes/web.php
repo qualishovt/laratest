@@ -5,7 +5,9 @@ use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
 use App\Postcard;
 use App\PostcardSendingService;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,4 +45,12 @@ Route::get('/postcards', function () {
 // Facade way
 Route::get('/facades', function () {
     Postcard::hello('Hello from facade', 'abc@123.com');
+});
+
+// Macro
+Route::get('/macro', function () {
+    dd(Str::partNumber('1234561515'));
+    dd(Str::prefix('97513164979', 'ABCD-'));
+
+    return Response::errorJson('A huge error occured! BOOM!');
 });
