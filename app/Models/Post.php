@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\QueryFilters\Active;
+use App\QueryFilters\Sort;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Pipeline\Pipeline;
 
 class Post extends Model implements TranslatableContract
 {
@@ -13,6 +16,18 @@ class Post extends Model implements TranslatableContract
 
     public $translatedAttributes = ['title', 'content'];
     protected $fillable = ['author'];
+
+    public static function allPosts()
+    {
+        return app(Pipeline::class)
+            ->send(Post::query())
+            ->through([
+                Active::class,
+                Sort::class
+            ])
+            ->thenReturn()
+            ->paginate(5);
+    }
 
     // public function getLocaleKey()
     // {

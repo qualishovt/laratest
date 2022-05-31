@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('posts', function(Blueprint $table) {
             $table->increments('id');
             $table->string('author');
+            $table->unsignedTinyInteger('active');
             $table->timestamps();
         });
     }

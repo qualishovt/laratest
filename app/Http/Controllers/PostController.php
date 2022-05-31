@@ -14,7 +14,20 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('id')->paginate(10);
+        // $posts = Post::query();
+
+        // if (request()->has('active')) {
+        //     $posts->where('active', request('active'));
+        // }
+
+        // if (request()->has('sort')) {
+        //     $posts->orderBy(request('sort'), request()->has('dir') ? request('dir') : 'asc');
+        // }
+
+        // $posts = $posts->paginate(10);
+
+        $posts = Post::allPosts();
+
         return view('posts.index', compact('posts'));
     }
 

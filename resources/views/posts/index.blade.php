@@ -9,6 +9,7 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Active</th>
                 <th scope="col">Author</th>
                 <th scope="col">Title En</th>
                 <th scope="col">Content En</th>
@@ -21,6 +22,7 @@
             @foreach ($posts as $post)
                 <tr>
                     <th scope="row">{{ $post->id }}</th>
+                    <td>{{ $post->active ? 'Yes' : 'No' }}</td>
                     <td>{{ $post->author }}</td>
                     <td>{{ $post->translate('en')->title }}</td>
                     <td>{{ $post->translate('en')->content }}</td>
@@ -42,6 +44,6 @@
         </tbody>
     </table>
     <div class="d-flex justify-content-center">
-        {{ $posts->links() }}
+        {{ $posts->appends(request()->input())->links() }}
     </div>
 @endsection
