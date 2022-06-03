@@ -46,4 +46,9 @@
     <div class="d-flex justify-content-center">
         {{ $posts->appends(request()->input())->links() }}
     </div>
+    @hook(sayHello)
+@endsection
+
+@section('qatiq')
+    <h1>Qatiq!</h1>
 @endsection

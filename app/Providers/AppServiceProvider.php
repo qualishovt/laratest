@@ -11,6 +11,7 @@ use App\Models\Channel;
 use App\PostcardSendingService;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Routing\ResponseFactory;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -59,6 +60,11 @@ class AppServiceProvider extends ServiceProvider
                 'message' => $message,
                 'error_code' => 123,
             ];
+        });
+
+        // Extending blade
+        Blade::directive('hook', function ($name) {
+            return "<?php echo App\Http\View\Hook::$name(); ?>";
         });
     }
 }

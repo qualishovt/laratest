@@ -1,12 +1,16 @@
 <?php
 
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
+use App\Models\User;
 use App\Postcard;
 use App\PostcardSendingService;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\LazyCollection;
 use Illuminate\Support\Str;
 
 /*
@@ -32,8 +36,10 @@ Route::get('/posts/{post}/edit', [PostController::class, 'edit']);
 Route::put('/posts/{post}', [PostController::class, 'update']);
 Route::delete('/posts/{post}', [PostController::class, 'destroy']);
 
+// Service Container
 Route::get('/pay', [PayOrderController::class, 'store']);
 
+// View Composers
 Route::get('/channels', [ChannelController::class, 'index']);
 
 // Typical way
@@ -53,4 +59,68 @@ Route::get('/macro', function () {
     dd(Str::prefix('97513164979', 'ABCD-'));
 
     return Response::errorJson('A huge error occured! BOOM!');
+});
+
+// Repository pattern
+Route::get('/customers', [CustomerController::class, 'index']);
+Route::get('/customer/{id}', [CustomerController::class, 'show']);
+Route::get('/customer/{id}/update', [CustomerController::class, 'update']);
+Route::get('/customer/{id}/delete', [CustomerController::class, 'destroy']);
+
+// lazy load
+Route::get('/lazy', function () {
+    // Memory exhausted
+    // $collection = Collection::times(10000000)
+    //     ->map(function ($number) {
+    //         return pow(2, $number);
+    //     })
+    //     ->all();
+
+    $collection = LazyCollection::times(100000000000000);
+
+    // return User::cursor();
+
+    return 'done!';
+});
+
+Route::get('generator', function () {
+    function notHappyFunction($number)
+    {
+        $return = [];
+
+        for ($i = 1; $i < $number; $i++) {
+            $return[] = $i;
+        }
+
+        return $return;
+    }
+
+    function happyFunction($number)
+    {
+        for ($i = 1; $i < $number; $i++) {
+            yield $i;
+        }
+    }
+
+    foreach (happyFunction(10000000) as $number) {
+        if ($number % 1000 == 0) {
+            dump('hello');
+        }
+    }
+
+    // function happyFunction($strings)
+    // {
+    //     foreach ($strings as $string) {
+    //         dump('start');
+    //         yield $string;
+    //         dump('end');
+    //     }
+    // }
+
+    // foreach (happyFunction(['One', 'Two', 'Three']) as $result) {
+    //     if ($result == 'Two') {
+    //         return;
+    //     }
+    //     dump($result);
+    // }
 });
