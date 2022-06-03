@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Extending blade
         Blade::directive('hook', function ($name) {
-            return "<?php echo App\Http\View\Hook::$name(); ?>";
+            return "<?php echo App\View\Hook::$name(); ?>";
         });
     }
 }

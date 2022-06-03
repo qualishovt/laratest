@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Http\View\Composers\ChannelsComposer;
+use App\View\Composers\ChannelsComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 

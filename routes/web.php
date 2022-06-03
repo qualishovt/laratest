@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\ContestEntryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PayOrderController;
 use App\Http\Controllers\PostController;
@@ -23,11 +24,6 @@ use Illuminate\Support\Str;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    // return view('welcome');
-    return redirect('/posts');
-});
 
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/posts/create', [PostController::class, 'create']);
@@ -124,3 +120,15 @@ Route::get('generator', function () {
     //     dump($result);
     // }
 });
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
+Route::post('/contest', [ContestEntryController::class, 'store']);

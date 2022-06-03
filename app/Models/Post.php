@@ -8,14 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Pipeline\Pipeline;
 
 class Post extends Model implements TranslatableContract
 {
-    use HasFactory, Translatable;
+    use HasFactory, Translatable, SoftDeletes;
 
     public $translatedAttributes = ['title', 'content'];
-    protected $fillable = ['author'];
+    protected $fillable = ['author', 'active', 'deleted_at'];
 
     public static function allPosts()
     {

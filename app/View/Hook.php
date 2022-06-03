@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\View;
+namespace App\View;
 
 use App\Models\Channel;
 use Illuminate\View\View;
