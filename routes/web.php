@@ -132,3 +132,4 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::post('/contest', [ContestEntryController::class, 'store']);
+Route::get('/gate', [PostController::class, 'private']);

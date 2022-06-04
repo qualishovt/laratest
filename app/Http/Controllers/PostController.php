@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -108,7 +109,15 @@ class PostController extends Controller
         $this->authorize('delete', $post);
 
         $post->delete();
-        
+
         return redirect('/posts');
+    }
+
+    public function private()
+    {
+        if (Gate::allows('admin-only', auth()->user())) {
+            return view('private');
+        }
+        abort(403);
     }
 }
