@@ -30,7 +30,10 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        //
+        return in_array($user->email, [
+            'tehran.alishov@gmail.com',
+            // 'a@b.c',
+        ]);
     }
 
     /**
@@ -41,7 +44,10 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->email, [
+            'tehran.alishov@gmail.com',
+            // 'a@b.c',
+        ]);
     }
 
     /**
@@ -65,7 +71,10 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        //
+        return in_array($user->email, [
+            'tehran.alishov@gmail.com',
+            // 'a@b.c',
+        ]);
     }
 
     /**

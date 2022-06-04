@@ -3,7 +3,9 @@
 @section('content')
     <h1>Posts</h1>
 
-    <a class="btn btn-success float-end" href="/posts/create" role="button"><i class="bi bi-plus-lg"></i> Add new</a>
+    @can('create', App\Models\Post::class)
+        <a class="btn btn-success float-end" href="/posts/create" role="button"><i class="bi bi-plus-lg"></i> Add new</a>
+    @endcan
 
     <table class="table">
         <thead>
@@ -31,13 +33,15 @@
                     <td class="text-end">
                         <a class="btn btn-warning" href="/posts/{{ $post->id }}/edit" role="button"><i
                                 class="bi bi-pencil"></i> Edit</a>
-                        <form class="d-inline" action="/posts/{{ $post->id }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger" role="button" onclick="return confirm('Delete?')">
-                                <i class="bi bi-trash"></i> Delete
-                            </button>
-                        </form>
+                        @can('view', $post)
+                            <form class="d-inline" action="/posts/{{ $post->id }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" role="button" onclick="return confirm('Delete?')">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
@@ -49,6 +53,6 @@
     @hook(sayHello)
 @endsection
 
-@section('qatiq')
-    <h1>Qatiq!</h1>
-@endsection
+{{-- @section('some_hook')
+    <h1>Some hook!</h1>
+@endsection --}}

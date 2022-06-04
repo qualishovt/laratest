@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NewEntryReceivedEvent;
 use App\Models\ContestEntry;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,8 @@ class ContestEntryController extends Controller
             'email' => 'required|email'
         ]);
 
-        ContestEntry::create($data);
+        $contestEntry = ContestEntry::create($data);
+        
+        NewEntryReceivedEvent::dispatch($contestEntry);
     }
 }

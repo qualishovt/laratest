@@ -49,6 +49,8 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
+
         $inputs = $request->all();
 
         Post::create($inputs);
@@ -102,7 +104,11 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+
+        $this->authorize('delete', $post);
+
         $post->delete();
+        
         return redirect('/posts');
     }
 }
