@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class WelcomeContestEntryNotification
+class WelcomeContestEntryNotification implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -27,6 +27,8 @@ class WelcomeContestEntryNotification
      */
     public function handle($event)
     {
+        sleep(10);
+
         Mail::to($event->contestEntry->email)->send(new WelcomeContestMail());
     }
 }

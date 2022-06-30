@@ -15,7 +15,9 @@ class ContestEntryController extends Controller
         ]);
 
         $contestEntry = ContestEntry::create($data);
-        
+
         NewEntryReceivedEvent::dispatch($contestEntry);
+
+        return redirect('/');
     }
 }
