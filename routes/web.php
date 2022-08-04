@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\ContestEntryController;
 use App\Http\Controllers\CustomerController;
@@ -129,7 +130,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 Route::post('/contest', [ContestEntryController::class, 'store']);
 Route::get('/gate', [PostController::class, 'private']);
+
+Route::get('category-tree-view', [CategoryController::class, 'manageCategory']);
+Route::post('add-category', [CategoryController::class, 'addCategory'])->name('add.category');
